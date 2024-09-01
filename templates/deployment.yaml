@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-exporter
+  name: helm-exporter
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-exporter
+      app: helm-exporter
   template:
     metadata:
       labels:
-        app: my-exporter
+        app: helm-exporter
     spec:
       serviceAccountName: k8s-101-role
       containers:
-        - name: my-exporter
-          image: ticalma/helm-metrics-exporter:latest
+        - name: helm-exporter
+          image: ticalma/helm-metrics-exporter:1.0
           ports:
             - containerPort: 2112

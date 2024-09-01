@@ -20,7 +20,7 @@ func NewHelmCollector() *HelmCollector {
 		releaseStatus: prometheus.NewDesc(
 			"helm_release_status",
 			"Status of Helm releases (1 for deployed, 0 otherwise)",
-			[]string{"release_name", "namespace", "chart", "app_version"},
+			[]string{"release_name", "namespace", "chart", "app_version", "chart_version"},
 			nil,
 		),
 	}
@@ -58,6 +58,7 @@ func (collector *HelmCollector) Collect(ch chan<- prometheus.Metric) {
 			release.Namespace,
 			release.Chart.Metadata.Name,
 			release.Chart.Metadata.AppVersion,
+			release.Chart.Metadata.Version,
 		)
 	}
 }
