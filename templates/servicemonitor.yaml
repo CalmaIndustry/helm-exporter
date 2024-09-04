@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+  generation: 1
+  name: helm-exporter
+  namespace: monitoring
+spec:
+  endpoints:
+  - honorLabels: true
+    path: /metrics
+    port: helm
+    scheme: http
+    scrapeTimeout: 30s
+  jobLabel: prometheus-operator
+  namespaceSelector:
+    matchNames:
+    - default
+  selector:
+    matchLabels:
+      app: helm
